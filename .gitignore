@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+#My files
+JANLOS.txt 
+train.txt
+Projekt1 - zasady zaliczenia.pdf
+testx.txt
