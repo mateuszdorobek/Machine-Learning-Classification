@@ -39,7 +39,7 @@ I've used 20% of training data as validation set.
 # Summarise
 
 For final algoritm I've choosen Generalized Boosted Regression Modeling
-<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/All_Lift.png"  width="600"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/All_ROC.png"  width="600"/>
+<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_Lift.png"  width="600"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_ROC.png"  width="600"/>
 
 |     Name      | Lift10 	| AUC 	 |
 |:------------:	|:------:	|:---:	 |
