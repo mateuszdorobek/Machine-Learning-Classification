@@ -1,5 +1,5 @@
 # Machine Learning - Classification Algorithms
-Mateusz Dorobek
+**Mateusz Dorobek - Inżynieria i Analiza Danych - MiNI - PW**
 
 ## Project
 Main goal of this project is to compare and find the best algorithm for binary classification problem.
@@ -50,6 +50,20 @@ def threshold_factorization(data, *t_list) -> pd.Series():
       return out
 ```
 Example of such distribution
+
+```python
+f = 'Var216'
+csv[f] = csv_org[f].copy()
+csv[f] = csv[f].fillna(-1)
+csv[f] = factorize(csv[f])
+plot(csv[f],sort=True,log=True,fontsize=14,small=True)
+csv[f] = threshold_factorization(csv[f],900,100,10,1)
+plot(csv[f],sort=True,log=True,fontsize=14,small=True)
+```
+
+<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/Threashold_Factorization.png" width="800"/>
+
+
 
 # Algorithms
 
