@@ -146,19 +146,43 @@ I've used 20% of training data as validation set.
 
 ### Extremely Randomized Trees
 
+```r
+extraTrees(x = train_no_class, y = train$class,  ntree=500, numThreads = 8)
+```
+
 <img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ET_Lift.png"  width="400"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ET_ROC.png"  width="400"/>
 
 
 ### Random Forest
 
+```r
+randomForest(class ~ ., data = train)
+```
+
 <img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/RF_Lift.png"  width="400"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/RF_ROC.png"  width="400"/>
 
 ### XGBoost
+
+```r
+xgboost(
+  data = data.matrix(train_no_class),
+  label = as.numeric(as.vector(train$class)),
+  nrounds = 2000,
+  max.depth = 4,
+  eta = 0.07,
+  nthreads = 8,
+  objective = "binary:logistic"
+)
+```
 
 <img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/XGB_Lift.png"  width="400"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/XGB_ROC.png"  width="400"/>
 
 
 ### Generalized Boosted Regression Modeling
+
+```r
+gbm(class ~ ., data = train, distribution = "gaussian")
+```
 
 <img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/GBM_Lift.png"  width="400"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/GBM_ROC.png"  width="400"/>
 
