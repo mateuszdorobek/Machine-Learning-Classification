@@ -29,31 +29,45 @@ valid <- data_train[-train_ind,]
 m1 <- randomForest(class ~ ., data = train)
 pred1 <- predict(m1, valid, type = 'prob')[, 2]
 pred_all1 <- prediction(pred1, valid$class)
+perf1 <- performance(pred_all1, measure = "auc")
+auc1 <- tail(unlist(perf1@y.values),n=1)
 perf1 <- performance(pred_all1, measure = "lift",x.measure="rpp")
-plot(perf1, main = "Random Forest Lift")
-unlist(perf1@y.values)[44]
-perf2 <- performance(pred_all2, measure = "auc")
-tail(unlist(perf2@y.values),n=1)
 
-roc.ROCR1 <- performance(pred_all1, measure = "tpr", x.measure = "fpr")
-plot(roc.ROCR1, main = "Random Forest - ROC Curve", col = "red")
-abline(0, 1)
+
+png(filename="images/RF_Lift.png")
+    unlist(perf1@x.values)[194]
+    lift10_1 <- unlist(perf1@y.values)[194]
+    plot(perf1, main = paste("Random Forest Lift10 = ",toString(round(lift10_1,2))))
+    abline(v=0.1, lty = 2)
+    abline(h=lift10_1, lty = 2)
+dev.off()
+png(filename="images/RF_ROC.png")
+    roc.ROCR1 <- performance(pred_all1, measure = "tpr", x.measure = "fpr")
+    plot(roc.ROCR1, main = "Random Forest - ROC Curve")
+    abline(0, 1)
+dev.off()
 
 #------------------GBM-----------------------------
 
 m2 <- gbm(class ~ ., data = train, distribution = "multinomial")
 pred2 = matrix(predict(m2, valid, n.trees = 100, type = 'response'),ncol=2)[,2]
 pred_all2 <- prediction(pred2, valid$class)
-perf2 <- performance(pred_all2, measure = "lift",x.measure="rpp")
-plot(perf2, main = "Generalized Boosted Regression Model Lift")
-unlist(perf2@x.values)[81]
-unlist(perf2@y.values)[81]
 perf2 <- performance(pred_all2, measure = "auc")
-tail(unlist(perf2@y.values),n=1)
+auc2 <- tail(unlist(perf2@y.values),n=1)
+perf2 <- performance(pred_all2, measure = "lift",x.measure="rpp")
 
-roc.ROCR2 <- performance(pred_all2, measure = "tpr", x.measure = "fpr")
-plot(roc.ROCR2, main = "Generalized Boosted Regression Model - ROC Curve", col = "green")
-abline(0, 1)
+png(filename="images/GBM_Lift.png")
+    unlist(perf2@x.values)[791]
+    lift10_2 <- unlist(perf2@y.values)[791]
+    plot(perf2, main = paste("GBM Lift10 = ",toString(round(lift10_2,2))))
+    abline(v=0.1, lty = 2)
+    abline(h=lift10_2, lty = 2)
+dev.off()
+png(filename="images/GBM_ROC.png")
+    roc.ROCR2 <- performance(pred_all2, measure = "tpr", x.measure = "fpr")
+    plot(roc.ROCR2, main = "Generalized Boosted Regression Model - ROC Curve")
+    abline(0, 1)
+dev.off()
 # ----------------XGBoost------------------------
 
 train_no_class <- train[,!(names(train) %in% "class")]
@@ -70,47 +84,108 @@ m3 <- xgboost(
 )
 pred3 <- predict(m3, data.matrix(valid_no_class))
 pred_all3 <- prediction(pred3, valid$class)
-perf3 <- performance(pred_all3, measure = "lift",x.measure="rpp")
-plot(perf3, main = "XGBoost Lift")
-unlist(perf3@y.values)[44]
 perf3 <- performance(pred_all3, measure = "auc")
-tail(unlist(perf3@y.values),n=1)
+auc3 <- tail(unlist(perf3@y.values),n=1)
+perf3 <- performance(pred_all3, measure = "lift",x.measure="rpp")
 
-roc.ROCR3 <- performance(pred_all3, measure = "tpr", x.measure = "fpr")
-plot(roc.ROCR3, main = "XGBoost - ROC Curve", col = "blue")
-abline(0, 1)
+png(filename="images/XGB_Lift.png")
+    unlist(perf3@x.values)[800]
+    lift10_3 <- unlist(perf3@y.values)[800]
+    plot(perf3, main = paste("XGBoost Lift10 = ",toString(round(lift10_3,2))))
+    abline(v=0.1, lty = 2)
+    abline(h=lift10_3, lty = 2)
+dev.off()
+png(filename="images/XGB_ROC.png")
+    roc.ROCR3 <- performance(pred_all3, measure = "tpr", x.measure = "fpr")
+    plot(roc.ROCR3, main = "XGBoost - ROC Curve")
+    abline(0, 1)
+dev.off()
+
 
 # ----------------ExtraTrees---------------------
 
 m4 <- extraTrees(x = train_no_class, y = train$class,  ntree=500, numThreads = 8)
 pred4 <- predict(m4, as.matrix(valid_no_class), probability = TRUE)[, 2]
 pred_all4 <- prediction(pred4, valid$class)
-perf4 <- performance(pred_all4, measure = "lift",x.measure="rpp")
-plot(perf4, main = "Extra Trees Lift")
-unlist(perf4@y.values)[44]
 perf4 <- performance(pred_all4, measure = "auc")
-tail(unlist(perf4@y.values),n=1)
+auc4 <- tail(unlist(perf4@y.values),n=1)
+perf4 <- performance(pred_all4, measure = "lift",x.measure="rpp")
 
-roc.ROCR4 <-performance(pred_all4, measure = "tpr", x.measure = "fpr")
-plot(roc.ROCR4, main = "Extra Trees - ROC Curve", col = "orange")
-abline(0, 1)
+png(filename="images/ET_Lift.png")
+    unlist(perf4@x.values)[100]
+    lift10_4 <- unlist(perf4@y.values)[100]
+    plot(perf4, main = paste("Extra Trees Lift10 = ",toString(round(lift10_4,2))))
+    abline(v=0.1, lty = 2)
+    abline(h=lift10_4, lty = 2)
+dev.off()
+png(filename="images/ET_ROC.png")
+    roc.ROCR4 <-performance(pred_all4, measure = "tpr", x.measure = "fpr")
+    plot(roc.ROCR4, main = paste("Extra Trees - ROC Curve - AUC = ",toString(round(auc4,2))))
+    abline(0, 1)
+dev.off()
+
 
 # -----------------Plotting---------------------------
 
-plot(roc.ROCR1, main = "ROC Curves", col = "red")
-plot(roc.ROCR2, add = TRUE, col = "green")
-plot(roc.ROCR3, add = TRUE, col = "navyblue")
-plot(roc.ROCR4, add = TRUE, col = "orange")
-abline(0, 1)
-legend(0,1, legend=c("XGBoost", "ExtraTrees", "GBRM", "RandomFores"),
-       col=c("red", "green", "blue", "orange"), lty=1, cex=0.8)
 
-plot(perf1, col = "red", main = "Lift Curves")
-plot(perf2, col = "green", add=TRUE)
-plot(perf3, col = "navyblue", add=TRUE)
-plot(perf4, col = "orange", add=TRUE)
-legend(0.85,14, legend=c("XGBoost", "ExtraTrees", "GBRM", "RandomFores"),
-       col=c("red", "green", "blue", "orange"), lty=1, cex=0.8)
+png(filename="images/ALL_ROC.png")
+    plot(roc.ROCR1, main = "ROC Curves", col = "red")
+    plot(roc.ROCR2, add = TRUE, col = "green")
+    plot(roc.ROCR3, add = TRUE, col = "navyblue")
+    plot(roc.ROCR4, add = TRUE, col = "purple")
+    abline(0, 1, lty = 2)
+    legend(
+      0.6,
+      0.3,
+      legend = c(
+        paste("RandomForest - ", toString(round(auc1, 2))),
+        paste("GBM - ", toString(round(auc2, 2))),
+        paste("XGBoost - ", toString(round(auc3, 2))),
+        paste("ExtraTrees - ", toString(round(auc4, 2)))
+      ),
+      col = c("red", "green", "blue", "purple"),
+      lty = 1,
+      cex = 0.8
+    )
+dev.off()
+png(filename="images/ALL_Lift.png")
+    plot(perf1, col = "red", main = "Lift Curves")
+    plot(perf2, col = "green", add=TRUE)
+    plot(perf3, col = "navyblue", add=TRUE)
+    plot(perf4, col = "purple", add=TRUE)
+    legend(
+      0.65,
+      14,
+      legend = c(
+        paste("RandomForest - ", toString(round(lift10_1, 2))),
+        paste("GBM - ", toString(round(lift10_2, 2))),
+        paste("XGBoost - ", toString(round(lift10_3, 2))),
+        paste("ExtraTrees - ",toString(round(lift10_4, 2)))
+      ),
+      col = c("red", "green", "blue", "purple"),
+      lty = 1,
+      cex = 0.8
+    )
+    abline(v=0.1, lty = 2)
+    abline(h=lift10_1, lty = 2, col="red")
+    abline(h=lift10_2, lty = 2, col="green")
+    abline(h=lift10_3, lty = 2, col="blue")
+    abline(h=lift10_4, lty = 2, col="purple")
+dev.off()
+
+
+  #RF
+  #GBM
+  #XGB
+  #ET
+lift10_1
+lift10_2
+lift10_3
+lift10_4
+auc1
+auc2
+auc3
+auc4
 
 # -----------------SavingResults-----------------------
 m <- gbm(class ~ ., data = train, distribution = "multinomial")
