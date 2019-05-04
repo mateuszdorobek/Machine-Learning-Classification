@@ -4,9 +4,9 @@
 ## Project
 Main goal of this project is to compare and find the best algorithm for binary classification problem.
 
-* [MATDOR.txt](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/MATDOR.txt) contains predictions for belonging to class 0
-* [classifiers.R](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/classifiers.R) contains machine learning algorithms
-* [data_extraction.ipynb](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/data_extraction.ipynb) contains data preparation script
+* [MATDOR](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/MATDOR.txt) contains predictions for belonging to class 0
+* [classifiers](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/classifiers.R) contains machine learning algorithms in **R**
+* [data_extraction](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/data_extraction.ipynb) contains data preparation script in **Python*
 
 ## Data
 
