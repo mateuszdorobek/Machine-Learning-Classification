@@ -192,12 +192,12 @@ gbm(class ~ ., data = train, distribution = "gaussian")
 
 # Summarise
 
-For final algoritm I've choosen Generalized Boosted Regression Modeling
+For final algoritm I've choosen **Random Forest**, because it has the highest Lift10 measure.
 <img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_Lift.png"  width="600"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_ROC.png"  width="600"/>
 
-|     Name      | Lift10 	| AUC 	 |
-|:------------:	|:------:	|:---:	 |
-|  ExtraTrees  	|  7.13  	| 78% 	 |
-| RandomForest 	|  7.99  	| 81% 	 |
-|    XGBoost   	|  8.87  	| 80% 	 |
-|      **GBM**  |**9.93** | **81%**|
+|     Name          | Lift10  | AUC 	 |
+|:------------:	    |:------: |:---:	 |
+|  ExtraTrees  	    |  4.34   | 78% 	 |
+| **RandomForest** 	|**5.42** | 80% 	 |
+|    XGBoost   	    |  4.87   | 80% 	 |
+|      GBM          |  5.30   | **83%**  |
