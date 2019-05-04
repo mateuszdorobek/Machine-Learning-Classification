@@ -192,8 +192,10 @@ gbm(class ~ ., data = train, distribution = "gaussian")
 
 # Summarise
 
-For final algoritm I've choosen **GBM**, because it has the highest AUC measure, and despite its Lift10 measure is slightly lower than Random Forest I think that GMB Lift Curve is more stable, and for most of the time is higher than Random Forest List Curve.
-<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_Lift.png"  width="600"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_ROC.png"  width="600"/>
+For final algoritm I've choosen **GBM**, because it has the highest AUC measure, and despite its Lift10 measure is slightly lower than Random Forest I think that GMB Lift Curve is more stable, and for most of the time is higher than Random Forest List Curve, as you can see in last - zoomed image.
+<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_Lift.png"  width="400"/><img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_ROC.png"  width="400"/>
+<img src="https://raw.githubusercontent.com/SaxMan96/Machine-Learning-Classification/master/images/ALL_Lift_Zoom.png"  width="800"/>
+
 
 |     Name          | Lift10  | AUC 	 |
 |:------------:	    |:------: |:---:	 |
