@@ -1,5 +1,5 @@
 # Machine Learning - Classification Algorithms
-**Mateusz Dorobek - Inżynieria i Analiza Danych - MiNI - PW**
+**Mateusz Dorobek - Data Science - Faculity of Mathematics and Information Science - Warsaw University of Technology**
 
 ## Project
 Main goal of this project is to compare and find the best algorithm for binary classification problem.
