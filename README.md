@@ -10,10 +10,12 @@ Main goal of this project is to compare and find the best algorithm for binary c
 
 ## Data
 
-Data used in this project comes from one of telecomunication company. They were anonimized, so data preparation couldn't base on expert experience. 
-All data can be found at this [link](https://home.ipipan.waw.pl/p.teisseyre/TEACHING/ZMUM/index.html). 
-All preprocessing, including standardization, encoding, factorization and other techniques was done using **Python**.
-Preprocessing script as well as this file is on my *GitHub* account at this [link](https://github.com/SaxMan96/Machine-Learning-Classification/blob/master/data_extraction.ipynb)
+Data used in this project comes from one of telecomunication company.
+They were anonimized, so data preparation couldn't base on expert experience.
+Unprocessed data can be found [here](https://home.ipipan.waw.pl/p.teisseyre/TEACHING/ZMUM/index.html). 
+Preprocessing including standardization, encoding, factorization and other techniques was done with Python.
+
+### Assumption
 
 I decided that if column has more than 99% of NaNs I'll remove it, so 23 columns went off.
 I've concatenated train and test set to perform the same data modyfications on both of them.
@@ -24,7 +26,7 @@ def load_data() -> pd.Series:
     csv = pd.concat([csv_train,csv_test])
     return csv
 ```
-Very usefull was `stat` function which write a lot of usefull statistics about column on screen
+Very usefull was `stat` function which shows a lot of usefull statistics about column on screen
 ```python
 def stat(f):
     nans = nans_ctr()
