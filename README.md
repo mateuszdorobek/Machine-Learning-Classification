@@ -41,16 +41,17 @@ def stat(f):
 ```
 ### Data Processing
 
-Data that I had pleasure to work with had almost 30% of NaNs, so I've to fill them up. My method was basiclu filling next row NaNs with value from previous no-empty value in that column. This method is in a lot of cases similar to median, or mean, but has two main advantages over them. 
+Data that I had pleasure to work with had almost 30% of NaNs, so I've to fill them up. My idea is basicly filling next row NaNs with value from previous no-empty value in that column. This method is in a lot of cases similar to median and mean, but has two main advantages over them. 
 
-* Is immune to oultiers compared to mean, 
-* has higher variance than median, not causing peak in distributon. 
+* Is immune to oultiers compared to mean.
+* Has higher variance than median, not causing peak in distributon. 
 
 ```python
 ...
 csv[f] = csv[f].fillna(method='ffill')
 csv[f] = csv[f].fillna(method='bfill')
 ```
+
 I've used `factorize` on string data to convert them to separable numeric classes
 ```python
 def factorize(data) -> pd.Series():
