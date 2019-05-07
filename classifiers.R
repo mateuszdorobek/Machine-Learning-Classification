@@ -43,7 +43,7 @@ png(filename="images/RF_Lift.png")
 dev.off()
 png(filename="images/RF_ROC.png")
     roc.ROCR1 <- performance(pred_all1, measure = "tpr", x.measure = "fpr")
-    plot(roc.ROCR1, main = "Random Forest - ROC Curve")
+    plot(roc.ROCR1, main = paste("Random Forest - ROC Curve - AUC = ",toString(round(lift10_1,2))))
     abline(0, 1)
 dev.off()
 
@@ -65,7 +65,7 @@ png(filename="images/GBM_Lift.png")
 dev.off()
 png(filename="images/GBM_ROC.png")
     roc.ROCR2 <- performance(pred_all2, measure = "tpr", x.measure = "fpr")
-    plot(roc.ROCR2, main = "Generalized Boosted Regression Model - ROC Curve")
+    plot(roc.ROCR2, main = paste("GBM - ROC Curve - AUC = ",toString(round(lift10_2,2))))
     abline(0, 1)
 dev.off()
 # ----------------XGBoost------------------------
@@ -97,7 +97,7 @@ png(filename="images/XGB_Lift.png")
 dev.off()
 png(filename="images/XGB_ROC.png")
     roc.ROCR3 <- performance(pred_all3, measure = "tpr", x.measure = "fpr")
-    plot(roc.ROCR3, main = "XGBoost - ROC Curve")
+    plot(roc.ROCR3, main = paste("XGBoost - ROC Curve - AUC = ",toString(round(lift10_3,2))))
     abline(0, 1)
 dev.off()
 
@@ -173,22 +173,8 @@ png(filename="images/ALL_Lift.png")
     abline(h=lift10_4, lty = 2, col="purple")
 dev.off()
 
-
-  #RF
-  #GBM
-  #XGB
-  #ET
-lift10_1
-lift10_2
-lift10_3
-lift10_4
-auc1
-auc2
-auc3
-auc4
-
 # -----------------SavingResults-----------------------
 m <- gbm(class ~ ., data = train, distribution = "multinomial")
-pred = matrix(predict(m, test, n.trees = 100, type = 'response'),ncol=2)[,1]
+pred = matrix(predict(m, test, n.trees = 100, type = 'response'),ncol=2)[,2]
 write.table(pred, "MATDOR.txt", append = FALSE, sep = "\n", dec = ".",
             row.names = FALSE, col.names = FALSE)
